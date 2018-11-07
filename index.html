@@ -21,7 +21,7 @@ body {
 			update : update,
 			render : render
 		});
-
+		
 		var player;
 		var starfield;
 		var enemy2;
@@ -66,23 +66,17 @@ body {
 			game.load.image('enemy-blue','assets/enemies/enemy3.png');
 			game.load.image('blueEnemyBullet','assets/bullets/bullet.png');
 			game.load.spritesheet('explosion','assets/explode.png',128,128);
-			
-
-
 		}
 
+		
+		
 		function create() {
 			
 			//sounds
-
 			theme = game.add.audio('theme');
 			shoot = game.add.audio('shoot');
-
 			shoot.volume = 0.3;
 			theme.loopFull(0.3);
-
-
-
 
 			game.scale.pageAlignHorizontally = true;
 			
@@ -138,32 +132,31 @@ body {
     			explosions.setAll('anchor.y', 0.5);
     			explosions.forEach( function(explosion) {
         		explosion.animations.add('explosion');
-    		});
+    			});
 
-    		// Shields stat
+    			// Shields stat
 
-    		shields = game.add.bitmapText(game.world.width-200 , 10,'spacefont', '' + player.health +'%', 30);
-    		shields.render = function() {
-    			shields.text = 'Shields: ' + Math.max(player.health, 0) + '%';
+    			shields = game.add.bitmapText(game.world.width-200 , 10,'spacefont', '' + player.health +'%', 30);
+    			shields.render = function() {
+    				shields.text = 'Shields: ' + Math.max(player.health, 0) + '%';
     			};
-    		shields.render();
+    			shields.render();
 
-    		// Score
+    			// Score
 
-    		scoreText = game.add.bitmapText(10,10, 'spacefont', '' ,30);
-    		scoreText.render = function(){
-    			scoreText.text = 'Score: ' + score;
-    		};
-    		scoreText.render();
+    			scoreText = game.add.bitmapText(10,10, 'spacefont', '' ,30);
+    			scoreText.render = function(){
+    				scoreText.text = 'Score: ' + score;
+    			};
+    			scoreText.render();
 
-    		// Game Over Text
+    			// Game Over Text
 
-    		gameOver = game.add.bitmapText(game.world.centerX, game.world.centerY, 'spacefont', 'GAME OVER!',110);
-    		gameOver.x = gameOver.x - gameOver.textWidth / 2;
-    		gameOver.y = gameOver.y - gameOver.textHeight / 3;
-    		gameOver.visible = false;
+    			gameOver = game.add.bitmapText(game.world.centerX, game.world.centerY, 'spacefont', 'GAME OVER!',110);
+    			gameOver.x = gameOver.x - gameOver.textWidth / 2;
+    			gameOver.y = gameOver.y - gameOver.textHeight / 3;
+    			gameOver.visible = false;
 			
-
 
 
 			// The baddies!
@@ -182,13 +175,11 @@ body {
 				addEnemyEmitterTrail(enemy);
 				enemy.body.setSize(enemy.width * 3 / 4, enemy.height);
 				enemy.damageAmount = 20;
-
 				enemy.events.onKilled.add(function(){
 					enemy.trail.kill();
 				});
 			});
 			game.time.events.add(1000, launchEnemy2);
-
 
 			blueEnemyBullets = game.add.group();
 			blueEnemyBullets.enableBody = true;
@@ -196,13 +187,13 @@ body {
 			blueEnemyBullets.createMultiple(30,'blueEnemyBullet');
 			blueEnemyBullets.callAll('crop', null, {x: 90, y: 0, width: 90, height: 70});
    			blueEnemyBullets.setAll('alpha', 0.9);
-    		blueEnemyBullets.setAll('anchor.x', 0.5);
-    		blueEnemyBullets.setAll('anchor.y', 0.5);
-    		blueEnemyBullets.setAll('outOfBoundsKill', true);
-    		blueEnemyBullets.setAll('checkWorldBounds', true);
-    		blueEnemyBullets.forEach(function(enemy){
-        		enemy.body.setSize(20, 30);
-    		});
+    			blueEnemyBullets.setAll('anchor.x', 0.5);
+    			blueEnemyBullets.setAll('anchor.y', 0.5);
+    			blueEnemyBullets.setAll('outOfBoundsKill', true);
+    			blueEnemyBullets.setAll('checkWorldBounds', true);
+    			blueEnemyBullets.forEach(function(enemy){
+        			enemy.body.setSize(20, 30);
+    			});
 
 			blueEnemies = game.add.group();
 			blueEnemies.enableBody = true;
@@ -214,7 +205,6 @@ body {
 			blueEnemies.forEach(function(enemy){
 				enemy.damageAmount = 40;
 			});
-
 		}
 
 		function update() {
@@ -275,24 +265,24 @@ body {
 
 			// Dead
 
-				if(! player.alive && gameOver.visible === false){
-					gameOver.visible = true;
-					gameOver.alpha = 0;
-					var fadeInGameOver = game.add.tween(gameOver);
-					fadeInGameOver.to({alpha: 1}, 1000, Phaser.Easing.Quintic.Out);
-					fadeInGameOver.onComplete.add(setResetHandlers);
-					fadeInGameOver.start();
-					function setResetHandlers(){
-						// The "click to restart" handler
-						tapRestart = game.input.onTap.addOnce(_restart,this);
-						spaceRestart = fireButton.onDown.addOnce(_restart,this);
-						function _restart(){
-							tapRestart.detach();
-							spaceRestart.detach();
-							restart();
-						}
+			if(! player.alive && gameOver.visible === false){
+				gameOver.visible = true;
+				gameOver.alpha = 0;
+				var fadeInGameOver = game.add.tween(gameOver);
+				fadeInGameOver.to({alpha: 1}, 1000, Phaser.Easing.Quintic.Out);
+				fadeInGameOver.onComplete.add(setResetHandlers);
+				fadeInGameOver.start();
+				function setResetHandlers(){
+					// The "click to restart" handler
+					tapRestart = game.input.onTap.addOnce(_restart,this);
+					spaceRestart = fireButton.onDown.addOnce(_restart,this);
+					function _restart(){
+						tapRestart.detach();
+						spaceRestart.detach();
+						restart();
 					}
 				}
+			}
 		}
 
 		function render() {
@@ -455,44 +445,42 @@ body {
 
 	}
 		function addEnemyEmitterTrail(enemy) {
-		    var enemyTrail = game.add.emitter(enemy.x, player.y - 10, 100);
-		    enemyTrail.width = 15;
+		    	var enemyTrail = game.add.emitter(enemy.x, player.y - 10, 100);
+		    	enemyTrail.width = 15;
   			enemyTrail.makeParticles('explosion', [1,2,3,4,5]);
    			enemyTrail.setXSpeed(20, -20);
   			enemyTrail.setRotation(50,-50);
   			enemyTrail.setAlpha(0.7, 0, 800);
 	  		enemyTrail.setScale(0.01, 0.1, 0.01, 0.1, 1000, Phaser.Easing.Quintic.Out);
-    		enemy.trail = enemyTrail;
+    			enemy.trail = enemyTrail;
 		}
 
 		function shipCollide(player, enemy) {
-		    var explosion = explosions.getFirstExists(false);
-    		explosion.reset(enemy.body.x + enemy.body.halfWidth, enemy.body.y + enemy.body.halfHeight);
-    		explosion.body.velocity.y = enemy.body.velocity.y;
-    		explosion.alpha = 0.7;
-    		explosion.play('explosion', 30, false, true);
+		    	var explosion = explosions.getFirstExists(false);
+    			explosion.reset(enemy.body.x + enemy.body.halfWidth, enemy.body.y + enemy.body.halfHeight);
+    			explosion.body.velocity.y = enemy.body.velocity.y;
+    			explosion.alpha = 0.7;
+    			explosion.play('explosion', 30, false, true);
 
-    		player.damage(enemy.damageAmount);
-    		shields.render();
+    			player.damage(enemy.damageAmount);
+    			shields.render();
 
-    		enemy.kill();
-
-
+    			enemy.kill();
 		}
 
 		function hitEnemy(enemy, bullet) {
-    		var explosion = explosions.getFirstExists(false);
-    		explosion.reset(bullet.body.x + bullet.body.halfWidth, bullet.body.y + bullet.body.halfHeight);
-    		explosion.body.velocity.y = enemy.body.velocity.y;
-    		explosion.alpha = 0.7;
-    		explosion.play('explosion', 30, false, true);
-    		enemy.kill();
-    		bullet.kill();
+    			var explosion = explosions.getFirstExists(false);
+    			explosion.reset(bullet.body.x + bullet.body.halfWidth, bullet.body.y + bullet.body.halfHeight);
+    			explosion.body.velocity.y = enemy.body.velocity.y;
+    			explosion.alpha = 0.7;
+    			explosion.play('explosion', 30, false, true);
+    			enemy.kill();
+    			bullet.kill();
 
-    		//Don't forget to Increase Score
+    			//Don't forget to Increase Score
 
-    		score+= enemy.damageAmount * 10;
-    		scoreText.render();
+    			score+= enemy.damageAmount * 10;
+    			scoreText.render();
 
 
 			// Pacing
@@ -511,14 +499,13 @@ body {
 		}
 
 		function enemyHitsPlayer (player, bullet) {
-    		var explosion = explosions.getFirstExists(false);
+    			var explosion = explosions.getFirstExists(false);
    			explosion.reset(player.body.x + player.body.halfWidth, player.body.y + player.body.halfHeight);
-    		explosion.alpha = 0.7;
-    		explosion.play('explosion', 30, false, true);
-    		bullet.kill();
-
-   			player.damage(bullet.damageAmount);
-    		shields.render()
+    			explosion.alpha = 0.7;
+    			explosion.play('explosion', 30, false, true);
+    			bullet.kill();
+			player.damage(bullet.damageAmount);
+    			shields.render()
 		}
 
 	</script>
