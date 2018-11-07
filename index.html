@@ -51,8 +51,8 @@ body {
 
 			//  We need this because the assets are on github pages
 			//  Remove the next 2 lines if running locally
-			//game.load.baseURL = 'https://aMimikyu.github.io/Shooter/';
-			//game.load.crossOrigin = 'anonymous';
+			game.load.baseURL = 'https://aMimikyu.github.io/Shooter/';
+			game.load.crossOrigin = 'anonymous';
 			
 			game.load.audio('theme','assets/audio/theme.mp3');
 			game.load.audio('shoot','assets/audio/shoot.wav');
@@ -131,12 +131,12 @@ body {
 
 			//  An explosion pool
 		   	explosions = game.add.group();
-    		explosions.enableBody = true;
-    		explosions.physicsBodyType = Phaser.Physics.ARCADE;
-    		explosions.createMultiple(30, 'explosion');
-    		explosions.setAll('anchor.x', 0.5);
-    		explosions.setAll('anchor.y', 0.5);
-    		explosions.forEach( function(explosion) {
+    			explosions.enableBody = true;
+    			explosions.physicsBodyType = Phaser.Physics.ARCADE;
+    			explosions.createMultiple(30, 'explosion');
+    			explosions.setAll('anchor.x', 0.5);
+    			explosions.setAll('anchor.y', 0.5);
+    			explosions.forEach( function(explosion) {
         		explosion.animations.add('explosion');
     		});
 
