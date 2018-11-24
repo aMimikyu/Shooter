@@ -379,6 +379,7 @@ body {
 			score = 0;
 			enemy2EnemySpacing = 1000;
 			blueEnemyLaunched = false;
+			miniBossLaunched = false;
 			game.time.events.remove(blueEnemyLaunchTimer);
 			game.time.events.add(5000,launchEnemy2);
 			game.state.start('Level1',true,false);
