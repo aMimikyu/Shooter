@@ -535,7 +535,8 @@ body {
 
     			game.time.events.add(Phaser.Timer.SECOND*12 , function() {
     				congratulations.stop();
-    				game.state.start('Level2',true,false, player.health);
+				upgraded = false;
+				game.state.start('Level2',true,false, player.health);
 				});
 			}
 
@@ -559,6 +560,7 @@ body {
     			if(expBar.width == maxExpWidth){
     				game.time.events.add(Phaser.Timer.SECOND*2,function(){
     					theme.stop();
+					upgraded = false;
     					game.state.start('Boss');
     				});
     			}
@@ -571,6 +573,7 @@ body {
 			if(beenHit>=200 && game.state.current == 'Boss'){
 				bossTheme.stop();
 				game.time.events.add(Phaser.Timer.SECOND*12 , function() {
+				upgraded = false;
     				game.state.start('Menu',true,false);
 				});				
 				miniBoss.kill();
