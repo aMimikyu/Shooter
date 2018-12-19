@@ -474,21 +474,21 @@ body {
 
 		function getExp(amount){
 			if(expBar.width < maxExpWidth){														
-    			if(expBar.width + amount > maxExpWidth){				//if the exp would exceed the exp required to level up
-    				if(player.weaponLevel==3){										//if we're already at max level, just set the exp to max
-    					expBar.width = maxExpWidth;
-    				}	
-    				else{															//otherwise , level up and pass all the remaining exp to the next level
-	    				expBar.width = expBar.width + amount - maxExpWidth;
-	    				player.weaponLevel += 1;
-	    				weaponLevelText.text = 'Weapon LV ' + player.weaponLevel;
-	    			}
+				if(expBar.width + amount > maxExpWidth){				//if the exp would exceed the exp required to level up
+					if(player.weaponLevel==3){										//if we're already at max level, just set the exp to max
+						expBar.width = maxExpWidth;
+					}	
+					else{															//otherwise , level up and pass all the remaining exp to the next level
+						expBar.width = expBar.width + amount - maxExpWidth;
+						player.weaponLevel += 1;
+						weaponLevelText.text = 'Weapon LV ' + player.weaponLevel;
+					}
 				}
 				else {
-    				expBar.width += amount/Math.pow(2,player.weaponLevel-1); 	//each level is twice as hard as the previous one. exponential function
-    			} 
+					expBar.width += amount/Math.pow(2,player.weaponLevel-1); 	//each level is twice as hard as the previous one. exponential function
+				} 
+			}
     		}
-    	}
 		function hitBoss(miniBoss, bullet){
 
 			boom.play();
