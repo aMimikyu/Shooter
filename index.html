@@ -587,13 +587,13 @@ body {
 			if(pickup==0){
 				health = healthUp.getFirstExists(false);
 				health.reset(posX-100,posY+100);
-				var angle = game.physics.arcade.moveToObject(health,player,400);
+				var angle = game.physics.arcade.moveToObject(health,player,150);
 			}
 			else if(pickup==1){
 				u = up.getFirstExists(false);
 				u.reset(posX,posY);
 				u.animations.play('play');
-				var angle = game.physics.arcade.moveToObject(u,player,400);
+				var angle = game.physics.arcade.moveToObject(u,player,150);
 			}
 
 		}
