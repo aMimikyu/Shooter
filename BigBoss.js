@@ -179,7 +179,7 @@ var BigBoss = {
     	up = game.add.group();
     	up.enableBody = true;
     	up.physicsBodyType = Phaser.Physics.ARCADE;
-    	up.createMultiple(5,'up');
+    	up.createMultiple(20,'up');
     	up.setAll('outOfBoundsKill',true);
 		up.setAll('checkWorldBounds',true);
 		up.forEach(function(up){
@@ -191,7 +191,7 @@ var BigBoss = {
 		healthUp = game.add.group();
 		healthUp.enableBody = true;
 		healthUp.physicsBodyType = Phaser.Physics.ARCADE;
-		healthUp.createMultiple(10,'health');
+		healthUp.createMultiple(20,'health');
 		healthUp.setAll('outOfBoundsKill',true);
 		healthUp.setAll('checkWorldBounds',true);
 		healthUp.forEach(function(health){
