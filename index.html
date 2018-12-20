@@ -574,6 +574,7 @@ body {
 				bossTheme.stop();
 				game.time.events.add(Phaser.Timer.SECOND*12 , function() {
 				upgraded = false;
+				beenHit = 0;
     				game.state.start('Menu',true,false);
 				});				
 				miniBoss.kill();
